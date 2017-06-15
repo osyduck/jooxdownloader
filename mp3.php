@@ -2,7 +2,7 @@
 
 
 
-$id  = "TEpRWUlwcnRzbis2WU1IZ3NJQ01zQT09"; 
+$id  = $_GET['id']; 
 $ch = curl_init('http://api.joox.com/web-fcgi-bin/web_get_songinfo?songid='.base64_decode($id).'&lang=id&country=id&from_type=null&channel_id=null&_='.time());
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 	curl_setopt($ch, CURLOPT_COOKIE, 'wmid=14997771; user_type=2; country=id; session_key=96870dd03ab9280c905566cad439c904;');
