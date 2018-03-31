@@ -1,5 +1,5 @@
 # Joox Song Downloader
-What This?
+What is This?
 -------------
 Download Original Song From Joox Server
 
@@ -18,4 +18,4 @@ Copyright
 
 Demo Web?
 -------------
-http://smansara.net/joox
+
