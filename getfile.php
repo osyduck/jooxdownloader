@@ -67,7 +67,7 @@
   header("Content-type: ".$mime);
   header("Content-Transfer-Encoding: Binary");
   header("Content-Length: ".curl_get_file_size($fi));
-  header("Content-Disposition: attachment; filename=".$sing." - ".$song."".$filetype);
+  header('Content-Disposition: attachment; filename="'.$sing.' - '.$song.''.$filetype.'"');
   header("Cache-Control: public, max-age=604800");
   readfile($fi);
 ?>
