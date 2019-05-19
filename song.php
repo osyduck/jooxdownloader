@@ -5,7 +5,8 @@ if(!$_GET['id']){
 	header('location: index.php');
 	exit;
 }
-	$ch = curl_init('http://api.joox.com/web-fcgi-bin/web_get_songinfo?songid='.base64_decode(trim($_GET['id'])).'&lang=id&country=id&from_type=null&channel_id=null&_='.time());
+	include 'functions.php';
+	$ch = curl_init('https://api.joox.com/web-fcgi-bin/web_get_songinfo?songid='.base64_decode(trim($_GET['id'])).'&lang=id&country=id&from_type=null&channel_id=null&_='.time());
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 	curl_setopt($ch, CURLOPT_COOKIE, 'wmid=14997771; user_type=2; country=id; session_key=96870dd03ab9280c905566cad439c904;');
 	curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.109 Safari/537.36');
@@ -14,7 +15,7 @@ if(!$_GET['id']){
 	$json = str_replace('MusicInfoCallback(', '', $json);
 	$json = str_replace(')', '', $json);
 	$json = json_decode($json);
-		$fi = $json->mp3Url;
+		$fi = $json->r320Url;
 /*	echo '<pre>';
 	print_r($json);
 	echo '</pre>'; */
@@ -22,7 +23,7 @@ if(!$_GET['id']){
 		header('location: index.php');
 		exit;
 	}
-	$ch = curl_init('http://api.joox.com/web-fcgi-bin/web_lyric?musicid='.base64_decode(trim($_GET['id'])).'&lang=id&country=id&_='.time());
+	$ch = curl_init('https://api.joox.com/web-fcgi-bin/web_lyric?musicid='.base64_decode(trim($_GET['id'])).'&lang=id&country=id&_='.time());
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 	curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.109 Safari/537.36');
 	$ly = curl_exec($ch);
@@ -73,31 +74,34 @@ if(!$_GET['id']){
 		</div>
       </div>
     </nav>
-    <div class="container">                    
+    <div class="container">
             <div class="panel panel-info" >
                     <div class="panel-heading">
                         <div class="panel-title"><?=$name?> - DunludLagu Gratis</div>
-                    </div>    
+                    </div>
                     <div class="panel-body">
 						<div class="text-center">
 							<img class="img-circle" height="128" width="128" src="<?=$json->imgSrc?>">
 							<h2><?=$name?></h2>
 							<audio controls>
-<source src="<?=$json->mp3Url?>" type="audio/mpeg">
+<source src="<?=$json->r320Url?>" type="audio/mpeg">
 </audio>
 						</div><hr>
 						Waktu Rilis: <b><?=$json->public_time?></b><br>
 						Artis: <a href="singer.php?id=<?=$json->msingerid?>"><b><?=$json->msinger?></b></a><br>
 						Album: <a href="album.php?id=<?=$json->malbumid?>"><b><?=$json->malbum?></b></a><br>
 						Playtime: <b><?=gmdate('i:s', $json->minterval)?></b><br>
-						MP3 320kbps(Original Quality): <a href="mp3.php/?id=<?=$_GET['id']?>"><b>Mirror Download</b></a><br>
-						M4A 100kbps+(TV Quality): <a href="m4a.php/?id=<?=$_GET['id']?>"><b>Mirror Download</b></a><br><hr>
+						MP3 320kbps (Original Quality): <a href="mp3.php/?id=<?=$_GET['id']?>"><b>Mirror Download</b> (<?=formatBytes($json->size320);?>)</a><br>
+						M4A 192kbps (High Quality): <a href="m4a.php/?id=<?=$_GET['id']?>"><b>Mirror Download</b></a><br>
+						MP3 128kbps (CD Quality): <a href="mp3.low.php/?id=<?=$_GET['id']?>"><b>Mirror Download</b> (<?=formatBytes($json->size128);?>)</a><br>
+						M4A 90kbps (TV Quality): <a href="m4a.low.php/?id=<?=$_GET['id']?>"><b>Mirror Download</b></a><br>
+						<hr>
 						<pre><?=$ly?></pre>
 						<center>
 <a href="lyric.php?id=<?=$_GET['id']?>" style="text-decoration:none;"><b>Download Lyric</b></a><br><br>
 </center>
-</div>                     
-                    </div>  
+</div>
+                    </div>
         </div>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/jquery-ui.min.js"></script>
