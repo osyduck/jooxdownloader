@@ -19,28 +19,33 @@
 	$fi = "";
   $filetype = ".".$format;
   $mime = "";
+  $size = "";
   if ($quality == '320' && $format == 'mp3')
   {
     $fi = $json->r320Url;
     $mime = "audio/mpeg";
+    $size = $json->size320;
   }
    
   elseif ($quality == '192' && $format == 'm4a')
   {
     $fi = $json->r192Url;
     $mime = "audio/mp4";
+    $size = curl_get_file_size($fi);
   }
    
   elseif ($quality == '128' && $format == 'mp3')
   {
-    $fi = $json->r128Url;
+    $fi = $json->mp3Url;
     $mime = "audio/mpeg";
+    $size = $json->size128;
   }
    
   elseif ($quality == '90' && $format == 'm4a')
   {
     $fi = $json->m4aUrl;
     $mime = "audio/mp4";
+    $size = curl_get_file_size($fi);
   }
    
   else
@@ -60,13 +65,15 @@
   
 	$sing = $json->msinger;
   $song = $json->msong;
-/*	echo '<pre>';
+/*
+	echo '<pre>';
 	print_r($json);
-	echo '</pre>'; */
+	echo '</pre>';
+*/
 /*header("Content-type: application/x-file-to-save");*/
   header("Content-type: ".$mime);
   header("Content-Transfer-Encoding: Binary");
-  header("Content-Length: ".curl_get_file_size($fi));
+  header("Content-Length: ".$size);
   header('Content-Disposition: attachment; filename="'.$sing.' - '.$song.''.$filetype.'"');
   header("Cache-Control: public, max-age=604800");
   readfile($fi);
