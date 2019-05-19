@@ -13,7 +13,7 @@
 	curl_setopt($ch, CURLOPT_COOKIE, 'wmid=14997771; user_type=2; country=id; session_key=96870dd03ab9280c905566cad439c904;');
 	curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.109 Safari/537.36');
 	$json = curl_exec($ch);
-
+	curl_close($ch);
 	$json = str_replace('MusicInfoCallback(', '', $json);
 	$json = str_replace(')', '', $json);
 	$json = json_decode($json);
@@ -94,7 +94,7 @@
 						</audio>
 					</div>
 					<hr>
-						Waktu Rilis: <b><?=tgl_indo($json->public_time, true);?></b><br>
+						Tanggal Rilis: <b><?=tgl_indo($json->public_time, true);?></b><br>
 						Artis: <a href="singer.php?id=<?=$json->msingerid?>"><b><?=$json->msinger?></b></a><br>
 						Album: <a href="album.php?id=<?=$json->malbumid?>"><b><?=$json->malbum?></b></a><br>
 						Playtime: <b><?=gmdate('i:s', $json->minterval)?></b><br>
