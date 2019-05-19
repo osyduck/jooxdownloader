@@ -6,7 +6,7 @@ if(!$_POST['q']):
 	exit;
 endif;
 	header('Content-Type: application/json');
-	$ch = curl_init('http://api.joox.com/web-fcgi-bin/web_smartbox?callback=mutiara&lang=id&country=id&search='.base64_encode(trim($_POST['q'])).'&_='.time());
+	$ch = curl_init('https://api.joox.com/web-fcgi-bin/web_smartbox?callback=mutiara&lang=id&country=id&search='.base64_encode(trim($_POST['q'])).'&_='.time());
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 	curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.109 Safari/537.36');
 	$json = curl_exec($ch);

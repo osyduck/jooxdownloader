@@ -5,7 +5,7 @@ if(!$_GET['id']||!is_numeric($_GET['id'])){
 	header('location: index.php');
 	exit;
 }
-	$ch = curl_init('http://api.joox.com/web-fcgi-bin/web_get_albuminfo?albumid='.trim($_GET['id']).'&lang=id&country=id&from_type=null&channel_id=null&_='.time());
+	$ch = curl_init('https://api.joox.com/web-fcgi-bin/web_get_albuminfo?albumid='.trim($_GET['id']).'&lang=id&country=id&from_type=null&channel_id=null&_='.time());
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 	curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.109 Safari/537.36');
 	$json = curl_exec($ch);
@@ -55,11 +55,11 @@ if(!$_GET['id']||!is_numeric($_GET['id'])){
 		</div>
       </div>
     </nav>
-    <div class="container">                    
+    <div class="container">
             <div class="panel panel-info" >
                     <div class="panel-heading">
                         <div class="panel-title"><?=$name?> - DunludLagu Gratis</div>
-                    </div>    
+                    </div>
                     <div class="panel-body">
 						<div class="text-center">
 							<img class="img-circle" height="128" width="128" src="<?=$json->albuminfo->picUrl?>">
@@ -71,14 +71,14 @@ if(!$_GET['id']||!is_numeric($_GET['id'])){
 									<thead>
 										<tr>
 											<th>#</th>
-											<th>Song Name</th>
+											<th>Nama Lagu</th>
 											<th>Artis</th>
 											<th>Album</th>
-											<th>Playtime</th>
+											<th>Durasi Lagu</th>
 										</tr>
 									</thead>
 								<tbody>
-							<? 
+							<?
 							$r = 0;$rf = count($json->albuminfo->songlist);
 							for($i=0;$i<$rf;$i++):
 								$r++;
@@ -88,8 +88,8 @@ if(!$_GET['id']||!is_numeric($_GET['id'])){
 							  </table>
 							 </div>
 							</div>
-</div>                     
-                    </div>  
+</div>
+                    </div>
         </div>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/jquery-ui.min.js"></script>

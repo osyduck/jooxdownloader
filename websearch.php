@@ -6,7 +6,7 @@ if(!$_POST['q']||!$_POST['w']||!$_POST['r']):
 	exit;
 endif;
 	header('Content-Type: application/json');
-	$ch = curl_init('http://api.joox.com/web-fcgi-bin//web_search?callback=mutiara&lang=id&country=id&type=0&search_input='.rawurlencode(trim($_POST['q'])).'&pn='.trim($_POST['w']).'&sin='.trim($_POST['e']).'&ein='.trim($_POST['r']).'&_='.time());
+	$ch = curl_init('https://api.joox.com/web-fcgi-bin//web_search?callback=mutiara&lang=id&country=id&type=0&search_input='.rawurlencode(trim($_POST['q'])).'&pn='.trim($_POST['w']).'&sin='.trim($_POST['e']).'&ein='.trim($_POST['r']).'&_='.time());
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 	curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.109 Safari/537.36');
 	$json = curl_exec($ch);
