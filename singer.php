@@ -1,7 +1,7 @@
 <?php
 	set_time_limit(0);
 	ignore_user_abort(1);
-	if(!$_GET['id']||!is_numeric($_GET['id']))
+	if(!isset($_GET['id']) || !is_numeric($_GET['id']))
 	{
 		header('location: index.php');
 		exit;
