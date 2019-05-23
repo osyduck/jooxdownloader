@@ -1,4 +1,5 @@
 <?php
+include 'functions.php';
 set_time_limit(0);
 ignore_user_abort(1);
 if(!$_GET['id']||!is_numeric($_GET['id']))
@@ -18,6 +19,9 @@ if(!$_GET['id']||!is_numeric($_GET['id']))
 		exit;
 	}
 	$name = base64_decode($json->albuminfo->creator->name);
+	$albumname = base64_decode($json->albuminfo->songlist[0]->albumname);
+	$ReleaseDate = tgl_indo(base64_decode($json->albuminfo->date), TRUE);
+	$TotalSongs = $json->albuminfo->song_sum;
 	?>
 <html lang="en">
   <head>
@@ -27,7 +31,7 @@ if(!$_GET['id']||!is_numeric($_GET['id']))
     <meta name="description" content="Donlod Lagu Ori Disini Coeg">
     <meta name="author" content="Anon">
     <link rel="icon" href="assets/images/favicon.ico">
-    <title><?=$name?> - Donlod Lagu Gratis</title>
+    <title><?=$name." - ".$albumname?> | Donlod Lagu Gratis</title>
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
 	<style>
 		body {
@@ -65,20 +69,20 @@ if(!$_GET['id']||!is_numeric($_GET['id']))
     <div class="container">
 			<div class="panel panel-info" >
 				<div class="panel-heading">
-					<div class="panel-title"><?=$name?> - DunludLagu Gratis</div>
+					<div class="panel-title"><?=$name." - ".$albumname?> | DunludLagu Gratis</div>
 				</div>
 				<div class="panel-body">
 					<div class="text-center">
 						<img class="img-circle" height="128" width="128" src="<?=$json->albuminfo->picUrl?>">
-						<h2><?=$name?></h2>
-						<p>
-							<small>
-								<i>
-									Waktu rilis: <?=base64_decode($json->albuminfo->date)?>
-								</i>
-							</small>
-						</p>
+						<h2><?=$albumname?></h2>
 					</div>
+					<hr>
+					 <b>Informasi mengenai Album : </b><br><br>
+					 
+					 Nama Album : <a href="album.php?id=<?=$_GET['id']?>"><b><?php echo $albumname; ?></b></a><br>
+					 Pembuat Album : <a href="singer.php?id=<?=$json->albuminfo->creator->singerid?>"><b><?php echo $name;?></b></a><br>
+					 Tanggal Rilis : <b><?php echo $ReleaseDate; ?></b><br>
+					 Jumlah Lagu : <b><?php echo $TotalSongs; ?> Lagu</b><br>
 					<hr>
 					<div class="table-responsive">
 						<table class="table table-striped table-bordered table-hover">
