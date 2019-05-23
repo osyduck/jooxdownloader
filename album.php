@@ -1,7 +1,8 @@
 <?php
 set_time_limit(0);
 ignore_user_abort(1);
-if(!$_GET['id']||!is_numeric($_GET['id'])){
+if(!$_GET['id']||!is_numeric($_GET['id']))
+{
 	header('location: index.php');
 	exit;
 }
@@ -11,7 +12,8 @@ if(!$_GET['id']||!is_numeric($_GET['id'])){
 	$json = curl_exec($ch);
 	curl_close($ch);
 	$json = json_decode($json);
-	if(!$json->albuminfo){
+	if(!$json->albuminfo)
+	{
 		header('location: index.php');
 		exit;
 	}
@@ -47,52 +49,101 @@ if(!$_GET['id']||!is_numeric($_GET['id'])){
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-		  <a href="#" class="navbar-brand">DonlodLagoe</a>        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-            <li><a href="index.php"><i class="glyphicon glyphicon-home"></i> Index</a></li>
-		  </ul>
+		  <a href="#" class="navbar-brand">DonlodLagoe</a>
 		</div>
-      </div>
-    </nav>
+		<div id="navbar" class="navbar-collapse collapse">
+			<ul class="nav navbar-nav">
+				<li>
+					<a href="index.php">
+						<i class="glyphicon glyphicon-home"></i> Index
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
     <div class="container">
-            <div class="panel panel-info" >
-                    <div class="panel-heading">
-                        <div class="panel-title"><?=$name?> - DunludLagu Gratis</div>
-                    </div>
-                    <div class="panel-body">
-						<div class="text-center">
-							<img class="img-circle" height="128" width="128" src="<?=$json->albuminfo->picUrl?>">
-							<h2><?=$name?></h2>
-							<p><small><i>Waktu rilis: <?=base64_decode($json->albuminfo->date)?></i></small></p>
-						</div><hr>
-							<div class="table-responsive">
-								<table class="table table-striped table-bordered table-hover">
-									<thead>
-										<tr>
-											<th>#</th>
-											<th>Nama Lagu</th>
-											<th>Artis</th>
-											<th>Album</th>
-											<th>Durasi Lagu</th>
-										</tr>
-									</thead>
-								<tbody>
-							<?
-							$r = 0;$rf = count($json->albuminfo->songlist);
+			<div class="panel panel-info" >
+				<div class="panel-heading">
+					<div class="panel-title"><?=$name?> - DunludLagu Gratis</div>
+				</div>
+				<div class="panel-body">
+					<div class="text-center">
+						<img class="img-circle" height="128" width="128" src="<?=$json->albuminfo->picUrl?>">
+						<h2><?=$name?></h2>
+						<p>
+							<small>
+								<i>
+									Waktu rilis: <?=base64_decode($json->albuminfo->date)?>
+								</i>
+							</small>
+						</p>
+					</div>
+					<hr>
+					<div class="table-responsive">
+						<table class="table table-striped table-bordered table-hover">
+							<thead>
+								<tr>
+									<th>#</th>
+									<th>Nama Lagu</th>
+									<th>Artis</th>
+									<th>Album</th>
+									<th>Durasi Lagu</th>
+								</tr>
+							</thead>
+							<tbody>
+							<?php
+							$r = 0;
+							$rf = count($json->albuminfo->songlist);
 							for($i=0;$i<$rf;$i++):
 								$r++;
-								print '<tr><td>'.$r.'</td><td><a href="song.php?id='.base64_encode($json->albuminfo->songlist[$i]->songid).'">'.base64_decode($json->albuminfo->songlist[$i]->songname).'</a></td><td><a href="singer.php?id='.$json->albuminfo->songlist[$i]->singerid.'">'.base64_decode($json->albuminfo->songlist[$i]->singername).'</a></td><td><a href="album.php?id='.$json->albuminfo->songlist[$i]->albumid.'">'.base64_decode($json->albuminfo->songlist[$i]->albumname).'</a></td><td><b>'.gmdate('i:s', $json->albuminfo->songlist[$i]->playtime).'</b></td></tr>';
-							endfor; ?>
+								echo "
+								<tr>
+									<td>".$r."</td>
+									<td>
+										<a href='song.php?id=".base64_encode($json->albuminfo->songlist[$i]->songid)."'>".base64_decode($json->albuminfo->songlist[$i]->songname)."</a>
+									</td>
+									<td>
+										<a href='singer.php?id=".$json->albuminfo->songlist[$i]->singerid."'>".base64_decode($json->albuminfo->songlist[$i]->singername)."</a>
+									</td>
+									<td>
+										<a href='album.php?id=".$json->albuminfo->songlist[$i]->albumid."'>
+										".base64_decode($json->albuminfo->songlist[$i]->albumname)."
+										</a>
+									</td>
+									<td>
+										<b>".gmdate('i:s', $json->albuminfo->songlist[$i]->playtime)."</b>
+									</td>
+								</tr>
+								";
+								/*
+								echo
+								'<tr>
+									<td>'.$r.'</td>
+									<td>
+										<a href="song.php?id='.base64_encode($json->albuminfo->songlist[$i]->songid).'">'.base64_decode($json->albuminfo->songlist[$i]->songname).'</a>
+									</td>
+									<td>
+										<a href="singer.php?id='.$json->albuminfo->songlist[$i]->singerid.'">'.base64_decode($json->albuminfo->songlist[$i]->singername).'</a></td><td><a href="album.php?id='.$json->albuminfo->songlist[$i]->albumid.'">'
+										.base64_decode($json->albuminfo->songlist[$i]->albumname).'
+										</a>
+									</td>
+									<td>
+										<b>'
+										.gmdate('i:s', $json->albuminfo->songlist[$i]->playtime).'</b>
+									</td>
+								</tr>';
+								*/
+								endfor; ?>
 								</tbody>
-							  </table>
-							 </div>
-							</div>
-</div>
-                    </div>
-        </div>
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/js/jquery-ui.min.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="assets/js/jquery.min.js"></script>
+		<script src="assets/js/jquery-ui.min.js"></script>
+		<script src="assets/js/bootstrap.min.js"></script>
 	</body>
 </html>
