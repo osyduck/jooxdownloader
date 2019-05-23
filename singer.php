@@ -75,7 +75,7 @@
 					<nav>
 						<ul class="pager">
 							<li><a id="single" onclick="openpage('<?=trim($_GET['id'])?>', '0', '29', '1');" href="#">Single (<?=$json->songnum?>)</a></li>
-							<li><a id="album" onclick="openpage('<?=trim($_GET['id'])?>', '')" href="#">Album (<?=$json->albumnum?>)</a></li>
+							<li><a id="album" href="#">Album (<?=$json->albumnum?>)</a></li>
 						</ul>
 					</nav>
 					<div id="salsakp">
