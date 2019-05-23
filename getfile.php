@@ -1,8 +1,9 @@
 <?php
   include 'functions.php';
-  if(!$_GET['id']){
+  if(!$_GET['id'])
+  {
     header('location: index.php');
-  	exit;
+    exit;
   }
   $id  = $_GET['id'];
   $quality = $_GET['q'];
