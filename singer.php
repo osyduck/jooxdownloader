@@ -1,13 +1,12 @@
 <?php
 	set_time_limit(0);
 	ignore_user_abort(1);
-	error_reporting(0);
 	if(!$_GET['id']||!is_numeric($_GET['id']))
 	{
 		header('location: index.php');
 		exit;
 	}
-	if(!$_POST['w']):
+	if(!isset($_POST['w'])):
 		$ch = curl_init('https://api.joox.com/web-fcgi-bin/web_album_singer?cmd=2&singerid='.trim($_GET['id']).'&sin=0&ein=29&lang=id&country=id&callback=mutiara&_='.time());
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 		curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.109 Safari/537.36');
