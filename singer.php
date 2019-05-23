@@ -1,24 +1,27 @@
 <?php
-set_time_limit(0);
-ignore_user_abort(1);
-if(!$_GET['id']||!is_numeric($_GET['id'])){
-	header('location: index.php');
-	exit;
-}
-if(!$_POST['w']):
-	$ch = curl_init('https://api.joox.com/web-fcgi-bin/web_album_singer?cmd=2&singerid='.trim($_GET['id']).'&sin=0&ein=29&lang=id&country=id&callback=mutiara&_='.time());
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-	curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.109 Safari/537.36');
-	$json = curl_exec($ch);
-	curl_close($ch);
-	$json = str_replace('mutiara(', '', $json);
-	$json = str_replace(')', '', $json);
-	$json = json_decode($json);
-	if(!$json->name){
+	set_time_limit(0);
+	ignore_user_abort(1);
+	error_reporting(0);
+	if(!$_GET['id']||!is_numeric($_GET['id']))
+	{
 		header('location: index.php');
 		exit;
 	}
-	$name = base64_decode($json->name);
+	if(!$_POST['w']):
+		$ch = curl_init('https://api.joox.com/web-fcgi-bin/web_album_singer?cmd=2&singerid='.trim($_GET['id']).'&sin=0&ein=29&lang=id&country=id&callback=mutiara&_='.time());
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+		curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.109 Safari/537.36');
+		$json = curl_exec($ch);
+		curl_close($ch);
+		$json = str_replace('mutiara(', '', $json);
+		$json = str_replace(')', '', $json);
+		$json = json_decode($json);
+		if(!$json->name)
+		{
+			header('location: index.php');
+			exit;
+		}
+		$name = base64_decode($json->name);
 	?>
 <html lang="en">
   <head>
@@ -49,34 +52,36 @@ if(!$_POST['w']):
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-		  <a href="#" class="navbar-brand">DonlodLagoe</a>        </div>
+				</div>
+				<a href="#" class="navbar-brand">DonlodLagoe</a>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
             <li><a href="index.php"><i class="glyphicon glyphicon-home"></i> Index</a></li>
-		  </ul>
-		</div>
+					</ul>
+				</div>
       </div>
     </nav>
     <div class="container">
-            <div class="panel panel-info" >
-                    <div class="panel-heading">
-                        <div class="panel-title"><?=$name?> - DunludLagu Gratis</div>
-                    </div>
-                    <div class="panel-body">
-						<div class="text-center">
-							<img class="img-circle" height="128" width="128" src="<?=$json->pic?>">
-							<h2><?=$name?></h2>
-						</div><hr>
-						<nav>
-							<ul class="pager">
-								<li><a id="single" onclick="openpage('<?=trim($_GET['id'])?>', '0', '29', '1');" href="#">Single (<?=$json->songnum?>)</a></li>
-								<li><a id="album" href="#">Album (<?=$json->albumnum?>)</a></li>
-							</ul>
-						</nav>
-						<div id="salsakp">
-							<div class="table-responsive">
-								<table class="table table-striped table-bordered table-hover">
-									<thead>
+			<div class="panel panel-info" >
+				<div class="panel-heading">
+					<div class="panel-title"><?=$name?> - DunludLagu Gratis</div>
+				</div>
+				<div class="panel-body">
+					<div class="text-center">
+						<img class="img-circle" height="128" width="128" src="<?=$json->pic?>">
+						<h2><?=$name?></h2>
+					</div>
+					<hr>
+					<nav>
+						<ul class="pager">
+							<li><a id="single" onclick="openpage('<?=trim($_GET['id'])?>', '0', '29', '1');" href="#">Single (<?=$json->songnum?>)</a></li>
+							<li><a id="album" onclick="openpage('<?=trim($_GET['id'])?>', '')" href="#">Album (<?=$json->albumnum?>)</a></li>
+						</ul>
+					</nav>
+					<div id="salsakp">
+						<div class="table-responsive">
+							<table class="table table-striped table-bordered table-hover">
+								<thead>
 										<tr>
 											<th>#</th>
 											<th>Song Name</th>
@@ -85,7 +90,7 @@ if(!$_POST['w']):
 										</tr>
 									</thead>
 								<tbody>
-							<?
+							<?php
 							$r = 0;$adf = count($json->songlist);
 							for($i=0;$i<$adf;$i++):
 								$r++;
@@ -97,34 +102,34 @@ if(!$_POST['w']):
 							</div>
 						<nav id="pagination" class="text-center">
 						  <ul class="pagination">
-						<? if($json->sum<=30): ?>
+						<?php if($json->sum<=30): ?>
 							<li id="btn1" class="active" onclick="openpage('<?=trim($_GET['id'])?>', '0', '29', '1');"><a href="#">1 <span class="sr-only">(current)</span></a></li>
-						<? elseif($json->sum<=60): ?>
+						<?php elseif($json->sum<=60): ?>
 							<li id="btn1" class="active" onclick="openpage('<?=trim($_GET['id'])?>', '0', '29', '1');"><a href="#">1 <span class="sr-only">(current)</span></a></li>
 							<li id="btn2" onclick="openpage('<?=trim($_GET['id'])?>', '30', '59', '2');"><a href="#">2 </a></li>
-						<? elseif($json->sum<=90): ?>
+						<?php elseif($json->sum<=90): ?>
 							<li id="btn1" class="active" onclick="openpage('<?=trim($_GET['id'])?>', '0', '29', '1');"><a href="#">1 <span class="sr-only">(current)</span></a></li>
 							<li id="btn2" onclick="openpage('<?=trim($_GET['id'])?>', '30', '59', '2');"><a href="#">2 </a></li>
 							<li id="btn3" onclick="openpage('<?=trim($_GET['id'])?>', '60', '89', '3');"><a href="#">3 </a></li>
-						<? elseif($json->sum<=120): ?>
+						<?php elseif($json->sum<=120): ?>
 							<li id="btn1" class="active" onclick="openpage('<?=trim($_GET['id'])?>', '0', '29', '1');"><a href="#">1 <span class="sr-only">(current)</span></a></li>
 							<li id="btn2" onclick="openpage('<?=trim($_GET['id'])?>', '30', '59', '2');"><a href="#">2 </a></li>
 							<li id="btn3" onclick="openpage('<?=trim($_GET['id'])?>', '60', '89', '3');"><a href="#">3 </a></li>
 							<li id="btn4" onclick="openpage('<?=trim($_GET['id'])?>', '90', '119', '4');"><a href="#">4 </a></li>
-						<? elseif($json->sum<=150): ?>
+						<?php elseif($json->sum<=150): ?>
 							<li id="btn1" class="active" onclick="openpage('<?=trim($_GET['id'])?>', '0', '29', '1');"><a href="#">1 <span class="sr-only">(current)</span></a></li>
 							<li id="btn2" onclick="openpage('<?=trim($_GET['id'])?>', '30', '59', '2');">><a href="#">2 </a></li>
 							<li id="btn3" onclick="openpage('<?=trim($_GET['id'])?>', '60', '89', '3');"><a href="#">3 </a></li>
 							<li id="btn4" onclick="openpage('<?=trim($_GET['id'])?>', '90', '119', '4');"><a href="#">4 </a></li>
 							<li id="btn5" onclick="openpage('<?=trim($_GET['id'])?>', '120', '149', '5');"><a href="#">5 </a></li>
-						<? elseif($json->sum<=180): ?>
+						<?php elseif($json->sum<=180): ?>
 							<li id="btn1" class="active" onclick="openpage('<?=trim($_GET['id'])?>', '0', '29', '1');"><a href="#">1 <span class="sr-only">(current)</span></a></li>
 							<li id="btn2" onclick="openpage('<?=trim($_GET['id'])?>', '30', '59', '2');"><a href="#">2 </a></li>
 							<li id="btn3" onclick="openpage('<?=trim($_GET['id'])?>', '60', '89', '3');"><a href="#">3 </a></li>
 							<li id="btn4" onclick="openpage('<?=trim($_GET['id'])?>', '90', '119', '4');"><a href="#">4 </a></li>
 							<li id="btn5" onclick="openpage('<?=trim($_GET['id'])?>', '120', '149', '5');"><a href="#">5 </a></li>
 							<li id="btn6" onclick="openpage('<?=trim($_GET['id'])?>', '150', '179', '6');"><a href="#">6 </a></li>
-						<? elseif($json->sum<=200): ?>
+						<?php elseif($json->sum<=200): ?>
 							<li id="btn1" class="active" onclick="openpage('<?=trim($_GET['id'])?>', '0', '29', '1');"><a href="#">1 <span class="sr-only">(current)</span></a></li>
 							<li id="btn2" onclick="openpage('<?=trim($_GET['id'])?>', '30', '59', '2');"><a href="#">2 </a></li>
 							<li id="btn3" onclick="openpage('<?=trim($_GET['id'])?>', '60', '89', '3');"><a href="#">3 </a></li>
@@ -132,15 +137,15 @@ if(!$_POST['w']):
 							<li id="btn5" onclick="openpage('<?=trim($_GET['id'])?>', '120', '149', '5');"><a href="#">5 </a></li>
 							<li id="btn6" onclick="openpage('<?=trim($_GET['id'])?>', '150', '179', '6');"><a href="#">6 </a></li>
 							<li id="btn7" onclick="openpage('<?=trim($_GET['id'])?>', '180', '199', '7');"><a href="#">7 </a></li>
-						<? endif; ?>
-						  </ul>
-						</nav>
-</div>
-                    </div>
-        </div>
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/js/jquery-ui.min.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
+						<?php endif; ?>
+					</ul>
+				</nav>
+			</div>
+		</div>
+	</div>
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/jquery-ui.min.js"></script>
+	<script src="assets/js/bootstrap.min.js"></script>
 	<script>
 	function openpage(t,i,a,ra){
 		$.ajax({
@@ -168,7 +173,7 @@ if(!$_POST['w']):
 	}</script>
   </body>
 </html>
-<?
+<?php
 else:
 	header('Content-Type: application/json');
 	$ch = curl_init('https://api.joox.com/web-fcgi-bin/web_album_singer?cmd=2&singerid='.trim($_GET['id']).'&sin='.trim($_POST['q']).'&ein='.trim($_POST['w']).'&lang=id&country=id&callback=mutiara&_='.time());
