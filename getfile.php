@@ -1,6 +1,6 @@
 <?php
   include 'functions.php';
-  if(!$_GET['id'])
+  if(!isset($_GET['id']))
   {
     header('location: index.php');
     exit;
@@ -13,7 +13,7 @@
   curl_setopt($ch, CURLOPT_COOKIE, 'wmid=14997771; user_type=2; country=id; session_key=96870dd03ab9280c905566cad439c904;');
   curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.109 Safari/537.36');
   $json = curl_exec($ch);
-  
+  curl_close($ch);
   $json = str_replace('MusicInfoCallback(', '', $json);
   $json = str_replace(')', '', $json);
   $json = json_decode($json);
