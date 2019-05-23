@@ -36,11 +36,11 @@
 		</div>
       </div>
     </nav>
-    <div class="container">                    
+    <div class="container">
             <div class="panel panel-info" >
                     <div class="panel-heading">
                         <div class="panel-title">DunludLagu Gratis</div>
-                    </div>    
+                    </div>
                     <div class="panel-body">
 					<form method="post" id="searchform" action="websearch.php">
 						<p><label>Cari Lagu Disini</label></p>
@@ -65,8 +65,8 @@
   </ul>
 </nav>
 					</form>
-                        </div>                     
-                    </div>  
+                        </div>
+                    </div>
         </div>
     </div>
     <script src="assets/js/jquery.min.js"></script>
@@ -120,7 +120,7 @@
 				$("#type").css('display', 'none');
 			}
 		});
-		return false		
+		return false
 	}
 	$(document).keypress(function (e) {
 		if (e.which == 13)

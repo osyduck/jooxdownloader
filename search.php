@@ -22,3 +22,4 @@ endif;
 	endfor;
 	$list .= '</div>';
 	print(json_encode(array('result' => true, 'content' => $list)));
+	
