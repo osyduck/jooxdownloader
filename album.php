@@ -116,24 +116,6 @@ if(!$_GET['id']||!is_numeric($_GET['id']))
 									</td>
 								</tr>
 								";
-								/*
-								echo
-								'<tr>
-									<td>'.$r.'</td>
-									<td>
-										<a href="song.php?id='.base64_encode($json->albuminfo->songlist[$i]->songid).'">'.base64_decode($json->albuminfo->songlist[$i]->songname).'</a>
-									</td>
-									<td>
-										<a href="singer.php?id='.$json->albuminfo->songlist[$i]->singerid.'">'.base64_decode($json->albuminfo->songlist[$i]->singername).'</a></td><td><a href="album.php?id='.$json->albuminfo->songlist[$i]->albumid.'">'
-										.base64_decode($json->albuminfo->songlist[$i]->albumname).'
-										</a>
-									</td>
-									<td>
-										<b>'
-										.gmdate('i:s', $json->albuminfo->songlist[$i]->playtime).'</b>
-									</td>
-								</tr>';
-								*/
 								endfor; ?>
 								</tbody>
 							</table>
