@@ -63,7 +63,7 @@
     die("Format and Quality Not Found or you type it wrong, please go back !");
   }
   
-	$sing = $json->msinger;
+  $sing = $json->msinger;
   $song = $json->msong;
 /*
 	echo '<pre>';
