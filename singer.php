@@ -6,7 +6,7 @@
 		header('location: index.php');
 		exit;
 	}
-	if(!isset($_POST['w'])):
+	if(!isset($_POST['w']) && !isset($_POST['q'])):
 		$ch = curl_init('https://api.joox.com/web-fcgi-bin/web_album_singer?cmd=2&singerid='.trim($_GET['id']).'&sin=0&ein=29&lang=id&country=id&callback=mutiara&_='.time());
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 		curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.109 Safari/537.36');
@@ -15,7 +15,7 @@
 		$json = str_replace('mutiara(', '', $json);
 		$json = str_replace(')', '', $json);
 		$json = json_decode($json);
-		if(!$json->name)
+		if(!isset($json->name))
 		{
 			header('location: index.php');
 			exit;
@@ -183,7 +183,7 @@ else:
 	$json = str_replace('mutiara(', '', $json);
 	$json = str_replace(')', '', $json);
 	$json = json_decode($json);
-	if(!$json->name)
+	if(!isset($json->name))
 		die(json_encode(array('result' => false, 'content' => '404')));
 	$list = '<div class="table-responsive">
 								<table class="table table-striped table-bordered table-hover">
@@ -195,8 +195,10 @@ else:
 											<th>Playtime</th>
 										</tr>
 									</thead>
-								<tbody>';$asuceleng = count($json->songlist);
-	for($i=0;$i<$asuceleng;$i++):
+								<tbody>';
+	$asuceleng = count($json->songlist);
+	$r = 0;
+	for($i = 0; $i < $asuceleng; $i++):
 								$r++;
 								$list .='<tr><td>'.$r.'</td><td><a href="song.php?id='.base64_encode($json->songlist[$i]->songid).'">'.base64_decode($json->songlist[$i]->songname).'</a></td><td><a href="album.php?id='.$json->songlist[$i]->albumid.'">'.base64_decode($json->songlist[$i]->albumname).'</a></td><td><b>'.gmdate('i:s', $json->songlist[$i]->playtime).'</b></td></tr>';
 							endfor;
