@@ -6,7 +6,7 @@ if(!$_POST['q']||!$_POST['w']||!$_POST['r']):
 	exit;
 endif;
 	header('Content-Type: application/json');
-	$ch = curl_init('http://api.joox.com/web-fcgi-bin//web_category_search?callback=mutiara&lang=id&country=id&type=1&search_input='.rawurlencode(trim($_POST['q'])).'&pn='.trim($_POST['w']).'&sin='.trim($_POST['e']).'&ein='.trim($_POST['r']).'&_='.time());
+	$ch = curl_init('https://api.joox.com/web-fcgi-bin//web_category_search?callback=mutiara&lang=id&country=id&type=1&search_input='.rawurlencode(trim($_POST['q'])).'&pn='.trim($_POST['w']).'&sin='.trim($_POST['e']).'&ein='.trim($_POST['r']).'&_='.time());
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 	curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.109 Safari/537.36');
 	$json = curl_exec($ch);
@@ -134,3 +134,4 @@ endif;
 		$btn10 = 1;
 	endif;
 	print(json_encode(array('result' => true, 'content' => $list, 'btn1' => array('show' => $btn1, 'q' => trim($_POST['q']), 'w' => 1, 'e' => 0, 'r' => 29) , 'btn2' => array('show' => $btn2, 'q' => trim($_POST['q']), 'w' => 2, 'e' => 30, 'r' => 59), 'btn3' => array('show' => $btn3, 'q' => trim($_POST['q']), 'w' => 3, 'e' => 60, 'r' => 89), 'btn4' => array('show' => $btn4, 'q' => trim($_POST['q']), 'w' => 4, 'e' => 90, 'r' => 119), 'btn5' => array('show' => $btn5, 'q' => trim($_POST['q']), 'w' => 5, 'e' => 120, 'r' => 149), 'btn6' => array('show' => $btn6, 'q' => trim($_POST['q']), 'w' => 6, 'e' => 150, 'r' => 179), 'btn7' => array('show' => $btn7, 'q' => trim($_POST['q']), 'w' => 7, 'e' => 180, 'r' => 199), 'btn8' => array('show' => $btn7, 'q' => trim($_POST['q']), 'w' => 8, 'e' => 210, 'r' => 199), 'btn9' => array('show' => $btn9, 'q' => trim($_POST['q']), 'w' => 9, 'e' => 240, 'r' => 199), 'btn10' => array('show' => $btn10, 'q' => trim($_POST['q']), 'w' => 10, 'e' => 270, 'r' => 199), 'sum' => $json->resultnum)));
+	
