@@ -36,19 +36,19 @@
   $song = $json->msong;
   ob_start();
   ?>
-Nama Lagu : <?=$song?>
+Nama Lagu : <?php echo $song;?>
 
-Penyanyi : <?=$sing?>
+Penyanyi : <?php echo $sing;?>
 
-Album : <?=$json->malbum?>
+Album : <?php echo $json->malbum;?>
 
-Tanggal Rilis : <?=tgl_indo($json->public_time, true);?>
+Tanggal Rilis : <?php echo tgl_indo($json->public_time, true);?>
 
-Durasi Lagu : <?=gmdate('i:s', $json->minterval)?>
+Durasi Lagu : <?php echo gmdate('i:s', $json->minterval);?>
 
 
 Lirik Lagu:
-<?=$ly?>
+<?php echo $ly;?>
 <?php
   $lyrics = ob_get_clean();
 /*	echo '<pre>';

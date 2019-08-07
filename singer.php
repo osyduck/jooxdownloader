@@ -30,7 +30,7 @@
     <meta name="description" content="Donlod Lagu Ori Disini Coeg">
     <meta name="author" content="Anon">
     <link rel="icon" href="assets/images/favicon.ico">
-    <title><?=$name?> - Donlod Lagu Gratis</title>
+    <title><?php echo $name;?> - Donlod Lagu Gratis</title>
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
 	<style>
 		body {
@@ -63,18 +63,18 @@
     <div class="container">
 			<div class="panel panel-info" >
 				<div class="panel-heading">
-					<div class="panel-title"><?=$name?> - DunludLagu Gratis</div>
+					<div class="panel-title"><?php echo $name;?> - DunludLagu Gratis</div>
 				</div>
 				<div class="panel-body">
 					<div class="text-center">
-						<img class="img-circle" height="128" width="128" src="<?=$json->pic?>">
-						<h2><?=$name?></h2>
+						<img class="img-circle" height="128" width="128" src="<?php echo $json->pic;?>">
+						<h2><?php echo $name;?></h2>
 					</div>
 					<hr>
 					<nav>
 						<ul class="pager">
-							<li><a id="single" onclick="openpage('<?=trim($_GET['id'])?>', '0', '29', '1');" href="#">Single (<?=$json->songnum?>)</a></li>
-							<li><a id="album" href="#">Album (<?=$json->albumnum?>)</a></li>
+							<li><a id="single" onclick="openpage('<?php echo trim($_GET['id']);?>', '0', '29', '1');" href="#">Single (<?php echo $json->songnum;?>)</a></li>
+							<li><a id="album" href="#">Album (<?php echo $json->albumnum;?>)</a></li>
 						</ul>
 					</nav>
 					<div id="salsakp">
@@ -102,40 +102,40 @@
 						<nav id="pagination" class="text-center">
 						  <ul class="pagination">
 						<?php if($json->sum<=30): ?>
-							<li id="btn1" class="active" onclick="openpage('<?=trim($_GET['id'])?>', '0', '29', '1');"><a href="#">1 <span class="sr-only">(current)</span></a></li>
+							<li id="btn1" class="active" onclick="openpage('<?php echo trim($_GET['id']);?>', '0', '29', '1');"><a href="#">1 <span class="sr-only">(current)</span></a></li>
 						<?php elseif($json->sum<=60): ?>
-							<li id="btn1" class="active" onclick="openpage('<?=trim($_GET['id'])?>', '0', '29', '1');"><a href="#">1 <span class="sr-only">(current)</span></a></li>
-							<li id="btn2" onclick="openpage('<?=trim($_GET['id'])?>', '30', '59', '2');"><a href="#">2 </a></li>
+							<li id="btn1" class="active" onclick="openpage('<?php echo trim($_GET['id']);?>', '0', '29', '1');"><a href="#">1 <span class="sr-only">(current)</span></a></li>
+							<li id="btn2" onclick="openpage('<?php echo trim($_GET['id']);?>', '30', '59', '2');"><a href="#">2 </a></li>
 						<?php elseif($json->sum<=90): ?>
-							<li id="btn1" class="active" onclick="openpage('<?=trim($_GET['id'])?>', '0', '29', '1');"><a href="#">1 <span class="sr-only">(current)</span></a></li>
-							<li id="btn2" onclick="openpage('<?=trim($_GET['id'])?>', '30', '59', '2');"><a href="#">2 </a></li>
-							<li id="btn3" onclick="openpage('<?=trim($_GET['id'])?>', '60', '89', '3');"><a href="#">3 </a></li>
+							<li id="btn1" class="active" onclick="openpage('<?php echo trim($_GET['id'])?>', '0', '29', '1');"><a href="#">1 <span class="sr-only">(current)</span></a></li>
+							<li id="btn2" onclick="openpage('<?php echo trim($_GET['id']);?>', '30', '59', '2');"><a href="#">2 </a></li>
+							<li id="btn3" onclick="openpage('<?php echo trim($_GET['id']);?>', '60', '89', '3');"><a href="#">3 </a></li>
 						<?php elseif($json->sum<=120): ?>
-							<li id="btn1" class="active" onclick="openpage('<?=trim($_GET['id'])?>', '0', '29', '1');"><a href="#">1 <span class="sr-only">(current)</span></a></li>
-							<li id="btn2" onclick="openpage('<?=trim($_GET['id'])?>', '30', '59', '2');"><a href="#">2 </a></li>
-							<li id="btn3" onclick="openpage('<?=trim($_GET['id'])?>', '60', '89', '3');"><a href="#">3 </a></li>
-							<li id="btn4" onclick="openpage('<?=trim($_GET['id'])?>', '90', '119', '4');"><a href="#">4 </a></li>
+							<li id="btn1" class="active" onclick="openpage('<?php echo trim($_GET['id'])?>', '0', '29', '1');"><a href="#">1 <span class="sr-only">(current)</span></a></li>
+							<li id="btn2" onclick="openpage('<?php echo trim($_GET['id']);?>', '30', '59', '2');"><a href="#">2 </a></li>
+							<li id="btn3" onclick="openpage('<?php echo trim($_GET['id']);?>', '60', '89', '3');"><a href="#">3 </a></li>
+							<li id="btn4" onclick="openpage('<?php echo trim($_GET['id']);?>', '90', '119', '4');"><a href="#">4 </a></li>
 						<?php elseif($json->sum<=150): ?>
-							<li id="btn1" class="active" onclick="openpage('<?=trim($_GET['id'])?>', '0', '29', '1');"><a href="#">1 <span class="sr-only">(current)</span></a></li>
-							<li id="btn2" onclick="openpage('<?=trim($_GET['id'])?>', '30', '59', '2');">><a href="#">2 </a></li>
-							<li id="btn3" onclick="openpage('<?=trim($_GET['id'])?>', '60', '89', '3');"><a href="#">3 </a></li>
-							<li id="btn4" onclick="openpage('<?=trim($_GET['id'])?>', '90', '119', '4');"><a href="#">4 </a></li>
-							<li id="btn5" onclick="openpage('<?=trim($_GET['id'])?>', '120', '149', '5');"><a href="#">5 </a></li>
+							<li id="btn1" class="active" onclick="openpage('<?php echo trim($_GET['id']);?>', '0', '29', '1');"><a href="#">1 <span class="sr-only">(current)</span></a></li>
+							<li id="btn2" onclick="openpage('<?php echo trim($_GET['id']);?>', '30', '59', '2');">><a href="#">2 </a></li>
+							<li id="btn3" onclick="openpage('<?php echo trim($_GET['id']);?>', '60', '89', '3');"><a href="#">3 </a></li>
+							<li id="btn4" onclick="openpage('<?php echo trim($_GET['id']);?>', '90', '119', '4');"><a href="#">4 </a></li>
+							<li id="btn5" onclick="openpage('<?php echo trim($_GET['id']);?>', '120', '149', '5');"><a href="#">5 </a></li>
 						<?php elseif($json->sum<=180): ?>
-							<li id="btn1" class="active" onclick="openpage('<?=trim($_GET['id'])?>', '0', '29', '1');"><a href="#">1 <span class="sr-only">(current)</span></a></li>
-							<li id="btn2" onclick="openpage('<?=trim($_GET['id'])?>', '30', '59', '2');"><a href="#">2 </a></li>
-							<li id="btn3" onclick="openpage('<?=trim($_GET['id'])?>', '60', '89', '3');"><a href="#">3 </a></li>
-							<li id="btn4" onclick="openpage('<?=trim($_GET['id'])?>', '90', '119', '4');"><a href="#">4 </a></li>
-							<li id="btn5" onclick="openpage('<?=trim($_GET['id'])?>', '120', '149', '5');"><a href="#">5 </a></li>
-							<li id="btn6" onclick="openpage('<?=trim($_GET['id'])?>', '150', '179', '6');"><a href="#">6 </a></li>
+							<li id="btn1" class="active" onclick="openpage('<?php echo trim($_GET['id']);?>', '0', '29', '1');"><a href="#">1 <span class="sr-only">(current)</span></a></li>
+							<li id="btn2" onclick="openpage('<?php echo trim($_GET['id']);?>', '30', '59', '2');"><a href="#">2 </a></li>
+							<li id="btn3" onclick="openpage('<?php echo trim($_GET['id']);?>', '60', '89', '3');"><a href="#">3 </a></li>
+							<li id="btn4" onclick="openpage('<?php echo trim($_GET['id']);?>', '90', '119', '4');"><a href="#">4 </a></li>
+							<li id="btn5" onclick="openpage('<?php echo trim($_GET['id']);?>', '120', '149', '5');"><a href="#">5 </a></li>
+							<li id="btn6" onclick="openpage('<?php echo trim($_GET['id']);?>', '150', '179', '6');"><a href="#">6 </a></li>
 						<?php elseif($json->sum<=200): ?>
-							<li id="btn1" class="active" onclick="openpage('<?=trim($_GET['id'])?>', '0', '29', '1');"><a href="#">1 <span class="sr-only">(current)</span></a></li>
-							<li id="btn2" onclick="openpage('<?=trim($_GET['id'])?>', '30', '59', '2');"><a href="#">2 </a></li>
-							<li id="btn3" onclick="openpage('<?=trim($_GET['id'])?>', '60', '89', '3');"><a href="#">3 </a></li>
-							<li id="btn4" onclick="openpage('<?=trim($_GET['id'])?>', '90', '119', '4');"><a href="#">4 </a></li>
-							<li id="btn5" onclick="openpage('<?=trim($_GET['id'])?>', '120', '149', '5');"><a href="#">5 </a></li>
-							<li id="btn6" onclick="openpage('<?=trim($_GET['id'])?>', '150', '179', '6');"><a href="#">6 </a></li>
-							<li id="btn7" onclick="openpage('<?=trim($_GET['id'])?>', '180', '199', '7');"><a href="#">7 </a></li>
+							<li id="btn1" class="active" onclick="openpage('<?php echo trim($_GET['id']);?>', '0', '29', '1');"><a href="#">1 <span class="sr-only">(current)</span></a></li>
+							<li id="btn2" onclick="openpage('<?php echo trim($_GET['id']);?>', '30', '59', '2');"><a href="#">2 </a></li>
+							<li id="btn3" onclick="openpage('<?php echo trim($_GET['id']);?>', '60', '89', '3');"><a href="#">3 </a></li>
+							<li id="btn4" onclick="openpage('<?php echo trim($_GET['id']);?>', '90', '119', '4');"><a href="#">4 </a></li>
+							<li id="btn5" onclick="openpage('<?php echo trim($_GET['id']);?>', '120', '149', '5');"><a href="#">5 </a></li>
+							<li id="btn6" onclick="openpage('<?php echo trim($_GET['id']);?>', '150', '179', '6');"><a href="#">6 </a></li>
+							<li id="btn7" onclick="openpage('<?php echo trim($_GET['id']);?>', '180', '199', '7');"><a href="#">7 </a></li>
 						<?php endif; ?>
 					</ul>
 				</nav>

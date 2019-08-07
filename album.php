@@ -1,12 +1,12 @@
 <?php
-include 'functions.php';
-set_time_limit(0);
-ignore_user_abort(1);
-if(!$_GET['id']||!is_numeric($_GET['id']))
-{
-	header('location: index.php');
-	exit;
-}
+	include 'functions.php';
+	set_time_limit(0);
+	ignore_user_abort(1);
+	if(!$_GET['id']||!is_numeric($_GET['id']))
+	{
+		header('location: index.php');
+		exit;
+	}
 	$ch = curl_init('https://api.joox.com/web-fcgi-bin/web_get_albuminfo?albumid='.trim($_GET['id']).'&lang=id&country=id&from_type=null&channel_id=null&_='.time());
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 	curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.109 Safari/537.36');
@@ -22,7 +22,7 @@ if(!$_GET['id']||!is_numeric($_GET['id']))
 	$albumname = base64_decode($json->albuminfo->songlist[0]->albumname);
 	$ReleaseDate = tgl_indo(base64_decode($json->albuminfo->date), TRUE);
 	$TotalSongs = $json->albuminfo->song_sum;
-	?>
+?>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -31,7 +31,7 @@ if(!$_GET['id']||!is_numeric($_GET['id']))
     <meta name="description" content="Donlod Lagu Ori Disini Coeg">
     <meta name="author" content="Anon">
     <link rel="icon" href="assets/images/favicon.ico">
-    <title><?=$name." - ".$albumname?> | Donlod Lagu Gratis</title>
+    <title><?php echo $name." - ".$albumname;?> | Donlod Lagu Gratis</title>
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
 	<style>
 		body {
@@ -69,18 +69,18 @@ if(!$_GET['id']||!is_numeric($_GET['id']))
     <div class="container">
 			<div class="panel panel-info" >
 				<div class="panel-heading">
-					<div class="panel-title"><?=$name." - ".$albumname?> | DunludLagu Gratis</div>
+					<div class="panel-title"><?php echo $name." - ".$albumname;?> | DunludLagu Gratis</div>
 				</div>
 				<div class="panel-body">
 					<div class="text-center">
-						<img class="img-circle" height="128" width="128" src="<?=$json->albuminfo->picUrl?>">
-						<h2><?=$albumname?></h2>
+						<img class="img-circle" height="128" width="128" src="<?php echo $json->albuminfo->picUrl;?>">
+						<h2><?php echo $albumname;?></h2>
 					</div>
 					<hr>
 					 <b>Informasi mengenai Album : </b><br><br>
 					 
-					 Nama Album : <a href="album.php?id=<?=$_GET['id']?>"><b><?php echo $albumname; ?></b></a><br>
-					 Pembuat Album : <a href="singer.php?id=<?=$json->albuminfo->creator->singerid?>"><b><?php echo $name;?></b></a><br>
+					 Nama Album : <a href="album.php?id=<?php echo $_GET['id']?>"><b><?php echo $albumname; ?></b></a><br>
+					 Pembuat Album : <a href="singer.php?id=<?php echo $json->albuminfo->creator->singerid;?>"><b><?php echo $name;?></b></a><br>
 					 Tanggal Rilis : <b><?php echo $ReleaseDate; ?></b><br>
 					 Jumlah Lagu : <b><?php echo $TotalSongs; ?> Lagu</b><br>
 					<hr>

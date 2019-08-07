@@ -50,7 +50,7 @@
     <meta name="description" content="Donlod Lagu Ori Disini Coeg">
     <meta name="author" content="Anon">
     <link rel="icon" href="assets/images/favicon.ico">
-    <title><?=$penyanyi." - ".$name?> | Download Lagu</title>
+    <title><?php echo $penyanyi." - ".$name?> | Download Lagu</title>
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
 	<style>
 		body {
@@ -83,29 +83,29 @@
     <div class="container">
       <div class="panel panel-info" >
         <div class="panel-heading">
-            <div class="panel-title"><?=$penyanyi." - ".$name?> | DunludLagu Gratis</div>
+            <div class="panel-title"><?php echo $penyanyi." - ".$name;?> | DunludLagu Gratis</div>
         </div>
         <div class="panel-body">
 					<div class="text-center">
-						<img class="img-circle" height="128" width="128" src="<?=$json->imgSrc?>">
-						<h2><?=$penyanyi." - ".$name?></h2>
+						<img class="img-circle" height="128" width="128" src="<?php echo $json->imgSrc;?>">
+						<h2><?php echo $penyanyi." - ".$name;?></h2>
 						<audio controls>
-							<source src="<?=$json->r320Url?>" type="audio/mpeg">
+							<source src="<?php echo $json->r320Url;?>" type="audio/mpeg">
 						</audio>
 					</div>
 					<hr>
-						Tanggal Rilis: <b><?=tgl_indo($json->public_time, true);?></b><br>
-						Artis: <a href="singer.php?id=<?=$json->msingerid?>"><b><?=$json->msinger?></b></a><br>
-						Album: <a href="album.php?id=<?=$json->malbumid?>"><b><?=$json->malbum?></b></a><br>
-						Playtime: <b><?=gmdate('i:s', $json->minterval)?></b><br>
-						MP3 320kbps (Original Quality): <a href="getfile.php?id=<?=$_GET['id']?>&q=320&f=mp3"><b>Mirror Download</b> (<?=formatBytes($json->size320);?>)</a><br>
-						M4A 192kbps (High Quality): <a href="getfile.php?id=<?=$_GET['id']?>&q=192&f=m4a"><b>Mirror Download</b> (<?=formatBytes(curl_get_file_size($json->r192Url));?>)</a><br>
-						MP3 128kbps (CD Quality): <a href="getfile.php?id=<?=$_GET['id']?>&q=128&f=mp3"><b>Mirror Download</b> (<?=formatBytes($json->size128);?>)</a><br>
-						M4A 90kbps (TV Quality): <a href="getfile.php?id=<?=$_GET['id']?>&q=90&f=m4a"><b>Mirror Download</b> (<?=formatBytes(curl_get_file_size($json->m4aUrl));?>)</a><br>
+						Tanggal Rilis: <b><?php echo tgl_indo($json->public_time, true);?></b><br>
+						Artis: <a href="singer.php?id=<?php echo $json->msingerid;?>"><b><?php echo $json->msinger;?></b></a><br>
+						Album: <a href="album.php?id=<?php echo $json->malbumid;?>"><b><?php echo $json->malbum;?></b></a><br>
+						Playtime: <b><?php echo gmdate('i:s', $json->minterval);?></b><br>
+						MP3 320kbps (Original Quality): <a href="getfile.php?id=<?php echo $_GET['id']?>&q=320&f=mp3"><b>Mirror Download</b> (<?php echo formatBytes($json->size320);?>)</a><br>
+						M4A 192kbps (High Quality): <a href="getfile.php?id=<?php echo $_GET['id']?>&q=192&f=m4a"><b>Mirror Download</b> (<?php echo formatBytes(curl_get_file_size($json->r192Url));?>)</a><br>
+						MP3 128kbps (CD Quality): <a href="getfile.php?id=<?php echo $_GET['id']?>&q=128&f=mp3"><b>Mirror Download</b> (<?php echo formatBytes($json->size128);?>)</a><br>
+						M4A 90kbps (TV Quality): <a href="getfile.php?id=<?php echo $_GET['id']?>&q=90&f=m4a"><b>Mirror Download</b> (<?php echo formatBytes(curl_get_file_size($json->m4aUrl));?>)</a><br>
 					<hr>
-					<pre><?=$ly?></pre>
+					<pre><?php echo $ly?></pre>
 					<center>
-						<a href="lyric.php?id=<?=$_GET['id']?>" style="text-decoration:none;"><b>Download Lyric</b></a><br><br>
+						<a href="lyric.php?id=<?php echo $_GET['id'];?>" style="text-decoration:none;"><b>Download Lyric</b></a><br><br>
 					</center>
 				</div>
 			</div>
