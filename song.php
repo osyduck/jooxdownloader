@@ -90,8 +90,8 @@ if(!$_GET['id']){
 						Artis: <a href="singer.php?id=<?=$json->msingerid?>"><b><?=$json->msinger?></b></a><br>
 						Album: <a href="album.php?id=<?=$json->malbumid?>"><b><?=$json->malbum?></b></a><br>
 						Playtime: <b><?=gmdate('i:s', $json->minterval)?></b><br>
-						MP3 320kbps(Original Quality): <a href="mp3.php/?id=<?=$_GET['id']?>"><b>Mirror Download</b></a><br>
-						M4A 100kbps+(TV Quality): <a href="m4a.php/?id=<?=$_GET['id']?>"><b>Mirror Download</b></a><br><hr>
+						MP3 320kbps(Original Quality): <a href="mp3.php?id=<?=$_GET['id']?>"><b>Mirror Download</b></a><br>
+						M4A 100kbps+(TV Quality): <a href="m4a.php?id=<?=$_GET['id']?>"><b>Mirror Download</b></a><br><hr>
 						<pre><?=$ly?></pre>
 						<center>
 <a href="lyric.php?id=<?=$_GET['id']?>" style="text-decoration:none;"><b>Download Lyric</b></a><br><br>
